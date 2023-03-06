@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<context:property-placeholder
+		location="classpath:spring.properties" />
+
+	<!-- Car Bean Start -->
+	<!-- Setter Level DI -->
+	<bean id="carIntro" class="com.abc.learning.modules.car.CarIntro">
+		<property name="image" value="${car.image}" />
+		<property name="intro" value="${car.intro}" />
+	</bean>
+
+	<!-- Setter Level DI -->
+	<bean id="carGovtRecognition"
+		class="com.abc.learning.modules.car.CarGovtRecognition">
+		<property name="isGovtRecognized"
+			value="${car.isGovtRecognized}" />
+	</bean>
+
+
+	<!-- Constructor Level DI -->
+	<bean id="car" class="com.abc.learning.modules.car.Car"
+		scope="singleton" init-method="display" destroy-method="destroy">
+		<constructor-arg value="${car.name}" />
+		<constructor-arg value="${car.type}" />
+		<constructor-arg value="${car.color}" />
+		<constructor-arg value="${car.gearCount}" />
+		<constructor-arg value="${car.seatCount}" />
+		<constructor-arg ref="carIntro" />
+		<constructor-arg ref="carGovtRecognition" />
+	</bean>
+
+	<!-- Car Bean End -->
+
+	<!-- Rikshaw Bean Start -->
+	<!-- Setter Level DI -->
+	<bean id="rikshawIntro"
+		class="com.abc.learning.modules.rikshaw.RikshawIntro">
+		<property name="image" value="${rikshaw.image}" />
+		<property name="intro" value="${rikshaw.intro}" />
+	</bean>
+
+	<!-- Setter Level DI -->
+	<bean id="rikshawGovtRecognised"
+		class="com.abc.learning.modules.rikshaw.RikshawGovtRecognised">
+		<property name="isGovtRecognized"
+			value="${rikshaw.isGovtRecognized}" />
+	</bean>
+
+
+	<!-- Constructor Level DI -->
+	<bean id="rikshaw"
+		class="com.abc.learning.modules.rikshaw.Rikshaw" scope="prototype"
+		init-method="display" destroy-method="destroy">
+		<constructor-arg value="${rikshaw.name}" />
+		<constructor-arg value="${rikshaw.type}" />
+		<constructor-arg value="${rikshaw.color}" />
+		<constructor-arg value="${rikshaw.gearCount}" />
+		<constructor-arg value="${rikshaw.seatCount}" />
+		<constructor-arg ref="rikshawIntro" />
+		<constructor-arg ref="rikshawGovtRecognised" />
+	</bean>
+
+	<!-- Rikshaw Bean Start -->
+
+</beans>
